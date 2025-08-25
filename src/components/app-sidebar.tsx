@@ -9,7 +9,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { Clapperboard, Home, Flame, History, Library, User, Heart } from "lucide-react";
+import { Clapperboard, Home, Flame, History, Library, User } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -37,14 +37,6 @@ export function AppSidebar() {
               <Link href="/">
                 <GlowingIcon icon={Home} />
                 <span>Home</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="For You" isActive={pathname === '/for-you'}>
-              <Link href="/for-you">
-                <GlowingIcon icon={Heart} />
-                <span>For You</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
