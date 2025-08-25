@@ -1,12 +1,4 @@
-export type Video = {
-  id: string;
-  title: string;
-  channel: string;
-  thumbnailUrl: string;
-  channelImageUrl: string;
-  views: string;
-  uploadedAt: string;
-};
+import type { Video } from './types';
 
 export const videos: Video[] = [
   {

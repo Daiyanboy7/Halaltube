@@ -1,8 +1,9 @@
 import { SidebarInset } from "@/components/ui/sidebar";
 import { Header } from "@/components/header";
 import { VideoGrid } from "@/components/video-grid";
+import type { Video } from "@/lib/types";
 
-export function AppContent() {
+export function AppContent({ videos }: { videos: Video[] }) {
   return (
     <SidebarInset>
         <Header />
@@ -10,7 +11,7 @@ export function AppContent() {
           <h1 className="text-2xl md:text-3xl font-bold mb-6 font-headline tracking-wider text-primary-foreground">
             Featured Videos
           </h1>
-          <VideoGrid />
+          <VideoGrid videos={videos} />
         </main>
     </SidebarInset>
   );

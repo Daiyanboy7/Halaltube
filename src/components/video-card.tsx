@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import type { Video } from '@/lib/mock-data';
+import type { Video } from '@/lib/types';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 interface VideoCardProps {
@@ -23,6 +23,7 @@ export function VideoCard({ video, onSelectVideo }: VideoCardProps) {
           height={400}
           className="h-full w-full object-cover"
           data-ai-hint="video thumbnail"
+          unoptimized
         />
       </div>
       <div className="mt-4 flex items-start gap-4">

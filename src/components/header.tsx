@@ -7,19 +7,35 @@ import { SidebarTrigger } from "./ui/sidebar";
 import { useAuth } from "./providers/auth-provider";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function Header() {
   const { user, signInWithGoogle, signOut } = useAuth();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-primary/10 bg-background/50 px-4 backdrop-blur-lg md:px-6">
       <div className="md:hidden">
         <SidebarTrigger />
       </div>
-      <div className="relative flex-1">
+      <form onSubmit={handleSearch} className="relative flex-1">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input placeholder="Search videos..." className="w-full rounded-full pl-10 bg-transparent" />
-      </div>
+        <Input 
+          placeholder="Search videos..." 
+          className="w-full rounded-full pl-10 bg-transparent"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </form>
       {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

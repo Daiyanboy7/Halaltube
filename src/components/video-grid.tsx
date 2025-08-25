@@ -1,12 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { videos, type Video } from '@/lib/mock-data';
+import type { Video } from '@/lib/types';
 import { VideoCard } from './video-card';
 import { VideoPlayerModal } from './video-player-modal';
 
-export function VideoGrid() {
+export function VideoGrid({ videos }: { videos: Video[] }) {
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+
+  if (videos.length === 0) {
+    return <p className="text-muted-foreground">No videos found.</p>;
+  }
 
   return (
     <>
