@@ -1,3 +1,4 @@
+
 'use server';
 
 import {google} from 'googleapis';
@@ -58,21 +59,44 @@ async function enrichVideosWithChannelImages(videos: Video[], videoItems: any[])
 export async function getPopularVideos(): Promise<Video[]> {
   try {
     const videoIds = [
-      "GERcgJaIPWQ",
-      "0WY9T_rBVKU",
-      "gZbK9S59pnI",
-      "DnMu5LWAQT0",
-      "cakwkkyzuco",
-      "AnMbvhqtF8E",
-      "CMPD6Ac1zH8",
-      "McHQFTv-cWY",
-      "S1YxRzVGyOg"
+      // User's original list
+      "hYjcS_w_i4A", // The Most Beautiful Equation in Math
+      "sBw_ybbw_0s", // The beauty of data visualization
+      "Jvi_9hV4KZI", // Quantum Computing explained in 10 minutes
+      "f4772kg_qig", // How to Build a PC
+      "I4sMhXLe868", // Introduction to Next.js 14
+      "m4-o_pB49a0", // The Art of Code
+      "73_OWzBr8Fo", // What is AGI?
+      "ysz5S6PUM-U", // How to make amazing bolognese
+      "GERcgJaIPWQ", // The Search for the Perfect Calendar
+      "0WY9T_rBVKU", // The Riddle That Seems Impossible
+      "gZbK9S59pnI", // The simplest 'impossible' puzzle
+      "DnMu5LWAQT0", // Why you can't solve these British puzzles
+      "cakwkkyzuco", // The most difficult puzzle you've never seen
+      "AnMbvhqtF8E", // The Seemingly IMPOSSIBLE Guess The Number
+      "CMPD6Ac1zH8", // The Almost Impossible Chess Puzzle
+      "McHQFTv-cWY", // The SAT Question Everyone Got Wrong
+      "S1YxRzVGyOg", // The puzzle that's older than you think
+      
+      // New additions based on user's theme
+      "HeQX2HjkcNo", // What is NOT Random? - Vsauce
+      "6o_x_X9K65E", // Building the Perfect Squirrel Proof Bird Feeder - Mark Rober
+      "k-w-48g1yYc", // What if you fell into a black hole? - Kurzgesagt
+      "p2G23nJGP5A", // The Most Complex International Borders in the World - Wendover Productions
+      "vA-b21K133c", // Why time doesn't exist - Up and Atom
+      "w2tKg3E53DM", // The cleverest puzzle from the world's smartest man - Stand-up Maths
+      "iLCRp8K3gWw", // How to Learn to Code - The Primeagen
+      "U_Hj_iB4jC0", // The Man Who Revolutionized Computer Science With Math - Quanta Magazine
+      "8A2t_t_mgKc", // This is what a Mensa IQ test looks like - Veritasium
+      "aircAruvnKk", // How to triple your memory by using this trick - Mark Rober
+      "M7lc1UVf-VE", // The Infinite Hotel Paradox - Jeff Dekofsky - TED-Ed
+      "UBdP-yA4yLg"  // What is the fastest way to alphabetize your bookshelf? - Vsauce
     ];
 
     const response = await youtube.videos.list({
       part: ['snippet', 'contentDetails', 'statistics'],
       id: videoIds,
-      maxResults: 20,
+      maxResults: 50,
     });
 
     if (!response.data.items) {
