@@ -8,7 +8,7 @@ const youtube = google.youtube({
   auth: process.env.YOUTUBE_API_KEY,
 });
 
-function-mapping from youtube video item to our Video type
+// Maps a YouTube video item to our Video type
 const mapYouTubeItemToVideo = (item: any): Video => {
   let thumbnail = 'https://placehold.co/600x400.png';
   if (item.snippet.thumbnails) {
