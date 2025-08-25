@@ -40,6 +40,16 @@ const studyQuotes = [
     "The journey of a thousand miles begins with a single step.",
     "You are never too old to set another goal or to dream a new dream.",
     "Well done is better than well said.",
+    "Procrastination makes easy things hard, hard things harder.",
+    "You don’t have to be great to start, but you have to start to be great.",
+    "The secret of success is to do the common thing uncommonly well.",
+    "I find that the harder I work, the more luck I seem to have.",
+    "Success is no accident. It is hard work, perseverance, learning, studying, sacrifice and most of all, love of what you are doing.",
+    "There are no shortcuts to any place worth going.",
+    "The only place where success comes before work is in the dictionary.",
+    "I'm a greater believer in luck, and I find the harder I work the more I have of it.",
+    "Discipline is the bridge between goals and accomplishment.",
+    "If people only knew how hard I've worked to gain my mastery, it wouldn't seem so wonderful at all.",
 ];
 
 export function AppSidebar() {
@@ -47,6 +57,8 @@ export function AppSidebar() {
   const [quote, setQuote] = useState("");
 
   useEffect(() => {
+    // This check ensures the quote is only generated on the client-side,
+    // preventing hydration mismatches.
     setQuote(studyQuotes[Math.floor(Math.random() * studyQuotes.length)]);
   }, []);
 
@@ -93,7 +105,7 @@ export function AppSidebar() {
         <SidebarSeparator />
         <SidebarMenu>
             <SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
-                <p className="px-2 text-xs text-muted-foreground">Made by Daiyan Al Shams</p>
+                <p className="px-2 text-xs font-medium text-primary drop-shadow-[0_0_3px_hsl(var(--primary))]">Made by Daiyan Al Shams</p>
             </SidebarMenuItem>
             <SidebarMenuItem className="hidden md:block">
                 <SidebarTrigger>
