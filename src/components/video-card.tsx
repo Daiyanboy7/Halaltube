@@ -23,7 +23,7 @@ export function VideoCard({ video, onSelectVideo }: VideoCardProps) {
       onClick={handleSelect}
       className="group w-full text-left"
     >
-      <div className="aspect-video w-full overflow-hidden rounded-lg bg-card transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/30">
+      <div className="aspect-video w-full overflow-hidden rounded-lg bg-card/50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/30 ring-1 ring-inset ring-transparent group-hover:ring-primary/50">
         <Image
           src={video.thumbnailUrl}
           alt={video.title}

@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { Clapperboard, Home, Flame, History, Library, User } from "lucide-react";
+import { Clapperboard, Home } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -41,32 +41,10 @@ export function AppSidebar() {
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="History">
-              <Link href="#">
-                <GlowingIcon icon={History} />
-                <span>History</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Library">
-                <Link href="#">
-                    <GlowingIcon icon={Library} />
-                    <span>Library</span>
-                </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="p-2">
         <SidebarMenu>
-            <SidebarMenuItem>
-                <SidebarMenuButton tooltip="Profile">
-                    <GlowingIcon icon={User} />
-                    <span>Profile</span>
-                </SidebarMenuButton>
-            </SidebarMenuItem>
             <SidebarMenuItem>
                 <ThemeToggle />
             </SidebarMenuItem>
