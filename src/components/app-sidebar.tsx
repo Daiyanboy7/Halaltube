@@ -30,6 +30,12 @@ const studyQuotes = [
     "The expert in anything was once a beginner.",
     "Success is the sum of small efforts, repeated day in and day out.",
     "Believe you can and you're halfway there.",
+    "The only way to do great work is to love what you do.",
+    "It does not matter how slowly you go as long as you do not stop.",
+    "The future belongs to those who believe in the beauty of their dreams.",
+    "Strive not to be a success, but rather to be of value.",
+    "The beautiful thing about learning is that no one can take it away from you.",
+    "The mind is not a vessel to be filled, but a fire to be kindled.",
 ];
 
 export function AppSidebar() {
