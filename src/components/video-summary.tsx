@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -6,8 +7,9 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { Sparkles } from 'lucide-react';
+import type { Video } from '@/lib/types';
 
-export function VideoSummary() {
+export function VideoSummary({ video }: { video: Video }) {
   const [summary, setSummary] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,8 +19,10 @@ export function VideoSummary() {
     setError(null);
     setSummary('');
     try {
+      // Note: In a real application, you would fetch the real transcript.
+      // We are using a placeholder here.
       const result = await summarizeVideo({
-        videoTitle: "Sample Video Title",
+        videoTitle: video.title,
         videoDescription: "A sample description of the video content.",
         videoTranscript: "This is a sample transcript... it would be much longer in a real scenario, detailing all spoken words in the video for the AI to process.",
       });
