@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import type { Video } from "@/lib/types";
 import { VideoPlayer } from "./video-player";
@@ -18,6 +19,8 @@ interface VideoPlayerModalProps {
 }
 
 export function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
+  const [isLiked, setIsLiked] = useState(false);
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl w-full p-0 border-primary/20 bg-background/80 backdrop-blur-2xl !rounded-xl">
@@ -37,7 +40,9 @@ export function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalPro
                   </div>
               </div>
               <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon"><ThumbsUp className="w-5 h-5"/></Button>
+                <Button variant="ghost" size="icon" onClick={() => setIsLiked(!isLiked)}>
+                  <ThumbsUp className={`w-5 h-5 ${isLiked ? 'text-primary fill-primary' : ''}`}/>
+                </Button>
                 <Button variant="ghost" size="icon"><Share2 className="w-5 h-5"/></Button>
                 <Button variant="ghost" size="icon"><Download className="w-5 h-5"/></Button>
                 <Button variant="ghost" size="icon"><Scissors className="w-5 h-5"/></Button>
