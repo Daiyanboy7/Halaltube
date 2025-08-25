@@ -8,6 +8,7 @@ const firebaseConfig = {
   "storageBucket": "halaltube-aywjt.firebasestorage.app",
   "apiKey": "AIzaSyAD3809OQODmpvJ-wWB-V8lEZhcGtCu_GI",
   "authDomain": "halaltube-aywjt.firebaseapp.com",
+  "measurementId": "",
   "messagingSenderId": "884230837831"
 };
 
