@@ -109,3 +109,17 @@
     transform: translateY(0);
   }
 }
+
+@layer utilities {
+  @keyframes scroll-text {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  .animate-scroll-text {
+    animation: scroll-text 30s linear infinite;
+  }
+}

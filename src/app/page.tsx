@@ -9,6 +9,7 @@ import { SidebarInset } from "@/components/ui/sidebar";
 import { useEffect, useState } from "react";
 import type { Video } from "@/lib/types";
 import { VideoPlayerModal } from "@/components/video-player-modal";
+import { MotivationalTextStream } from "@/components/motivational-text-stream";
 
 export default function ForYouPage() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -36,11 +37,12 @@ export default function ForYouPage() {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen relative">
+        <MotivationalTextStream />
         <AppSidebar />
         <SidebarInset>
             <Header />
-            <main className="flex-1 p-4 md:p-6 lg:p-8">
+            <main className="flex-1 p-4 md:p-6 lg:p-8 z-10">
               <h1 className="text-2xl md:text-3xl font-bold mb-6 font-headline tracking-wider text-primary-foreground">
                 Popular Videos
               </h1>
