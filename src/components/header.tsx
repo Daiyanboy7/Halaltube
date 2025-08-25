@@ -1,17 +1,20 @@
+
 "use client";
 
 import { Search, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 import { useAuth } from "./providers/auth-provider";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function Header() {
   const { user, signInWithGoogle, signOut } = useAuth();
+  const { state } = useSidebar();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -24,7 +27,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-primary/20 bg-background/30 px-4 backdrop-blur-xl md:px-6">
-      <div className="md:hidden">
+      <div className={cn("flex items-center gap-2", state === 'expanded' && 'md:hidden')}>
         <SidebarTrigger />
       </div>
       <form onSubmit={handleSearch} className="relative flex-1 flex items-center">
