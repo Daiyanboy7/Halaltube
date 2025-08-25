@@ -36,6 +36,10 @@ const studyQuotes = [
     "Strive not to be a success, but rather to be of value.",
     "The beautiful thing about learning is that no one can take it away from you.",
     "The mind is not a vessel to be filled, but a fire to be kindled.",
+    "The best way to predict the future is to create it.",
+    "The journey of a thousand miles begins with a single step.",
+    "You are never too old to set another goal or to dream a new dream.",
+    "Well done is better than well said.",
 ];
 
 export function AppSidebar() {
@@ -43,12 +47,11 @@ export function AppSidebar() {
   const [quote, setQuote] = useState("");
 
   useEffect(() => {
-    // Set a random quote on mount, client-side only
     setQuote(studyQuotes[Math.floor(Math.random() * studyQuotes.length)]);
   }, []);
 
   return (
-    <Sidebar className="border-r border-primary/10 bg-background/30 backdrop-blur-xl">
+    <Sidebar className="border-r border-primary/10 bg-card/50 backdrop-blur-xl">
       <SidebarHeader>
         <Link href="/" className="flex items-center gap-2 p-4">
           <Clapperboard className="w-8 h-8 text-primary drop-shadow-[0_0_8px_hsl(var(--primary))]" />
@@ -67,7 +70,7 @@ export function AppSidebar() {
               className="relative"
             >
               <Link href="/">
-                <span className="absolute left-0 top-0 h-full w-1 bg-accent rounded-r-full transition-transform duration-300 scale-y-0 group-hover:scale-y-100" />
+                <span className="absolute left-0 top-0 h-full w-1 bg-accent rounded-r-full transition-transform duration-300 scale-y-0 group-data-[active=true]:scale-y-100 group-hover:scale-y-100" />
                 <GlowingIcon icon={Home} />
                 <span className="transition-transform duration-200 group-hover:translate-x-1">Home</span>
               </Link>
