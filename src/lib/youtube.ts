@@ -5,7 +5,7 @@ import type {Video} from '@/lib/types';
 
 const youtube = google.youtube({
   version: 'v3',
-  auth: process.env.YOUTUBE_API_KEY,
+  auth: process.env.GOOGLE_API_KEY,
 });
 
 // Maps a YouTube video item to our Video type
