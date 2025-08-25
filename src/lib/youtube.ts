@@ -90,7 +90,27 @@ export async function getPopularVideos(): Promise<Video[]> {
       "8A2t_t_mgKc", // This is what a Mensa IQ test looks like - Veritasium
       "aircAruvnKk", // How to triple your memory by using this trick - Mark Rober
       "M7lc1UVf-VE", // The Infinite Hotel Paradox - Jeff Dekofsky - TED-Ed
-      "UBdP-yA4yLg"  // What is the fastest way to alphabetize your bookshelf? - Vsauce
+      "UBdP-yA4yLg",  // What is the fastest way to alphabetize your bookshelf? - Vsauce
+      "2_hFs8Pqsvg",
+      "ajgj7Rp_fFI",
+      "sgZUGW4eKHo",
+      "g6iGZHFmw4w",
+      "FKYk7mUeNt4",
+      "Vyc6pOVOpM8",
+      "3h8gfv3cqtw",
+      "YumHD-JqdZQ",
+      "UbnZnSIna3U",
+      "Oe6m6IZClf4",
+      "xsYJEPObiio",
+      "H91lNeuf0W4",
+      "Pik78-UbU6E",
+      "p63DIhdJyp0",
+      "Um3coam5bKs",
+      "i2tIdjc1Wuo",
+      "tguOPxQLpCs",
+      "ZUVTNTgf2lE",
+      "DkBZ-GUgxco",
+      "TYoUS5gm1m8"
     ];
 
     const response = await youtube.videos.list({
