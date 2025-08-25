@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { AuthProvider } from '@/components/providers/auth-provider';
+import { MouseGlow } from '@/components/mouse-glow';
 
 export const metadata: Metadata = {
   title: 'HalalTube',
@@ -29,6 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
+            <MouseGlow />
             {children}
             <Toaster />
           </AuthProvider>

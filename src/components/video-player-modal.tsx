@@ -28,8 +28,8 @@ export function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalPro
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl w-full p-0 border-primary/20 bg-background/80 backdrop-blur-2xl !rounded-xl">
-        <div className="grid md:grid-cols-3 gap-4">
+      <DialogContent className="max-w-4xl w-full p-0 border-primary/20 bg-background/50 backdrop-blur-2xl !rounded-xl">
+        <div className="grid md:grid-cols-3 gap-0">
           <div className="md:col-span-3 lg:col-span-2 p-4">
             <VideoPlayer videoId={video.id} />
             <DialogHeader className="mt-4">
@@ -56,7 +56,7 @@ export function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalPro
             <Separator className="my-6 bg-primary/20" />
             <SmartScrubbing videoDataUri={sampleVideoDataUri} />
           </div>
-          <div className="md:col-span-3 lg:col-span-1 p-4 bg-black/20 lg:rounded-r-xl overflow-y-auto max-h-[90vh]">
+          <div className="md:col-span-3 lg:col-span-1 p-4 bg-black/30 backdrop-blur-sm lg:rounded-r-xl overflow-y-auto max-h-[90vh]">
             <div className="flex flex-col gap-6">
                 <VideoSummary video={video} />
                 <Separator className="bg-primary/20" />

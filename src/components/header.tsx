@@ -23,7 +23,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-primary/10 bg-background/50 px-4 backdrop-blur-lg md:px-6">
+    <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-primary/20 bg-background/30 px-4 backdrop-blur-xl md:px-6">
       <div className="md:hidden">
         <SidebarTrigger />
       </div>
@@ -31,7 +31,7 @@ export function Header() {
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input 
           placeholder="Search videos..." 
-          className="w-full rounded-full pl-10 pr-12 bg-transparent"
+          className="w-full rounded-full pl-10 pr-12 bg-transparent backdrop-blur-sm"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

@@ -78,5 +78,23 @@
   body {
     @apply bg-background text-foreground;
     background-color: #1A1A33;
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--primary) / 0.1), #1A1A33);
+  }
+  
+  .mouse-glow {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:
+      radial-gradient(
+        600px circle at var(--mouse-x) var(--mouse-y),
+        hsla(var(--primary), 0.15),
+        transparent 80%
+      );
+    z-index: 9999;
+    transition: background 0.1s ease-out;
   }
 }

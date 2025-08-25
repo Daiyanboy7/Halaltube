@@ -22,7 +22,7 @@ const GlowingIcon = ({ icon: Icon, ...props }: { icon: React.ElementType, [key: 
 export function AppSidebar() {
   const pathname = usePathname();
   return (
-    <Sidebar className="border-r border-primary/10 bg-background/50 backdrop-blur-xl">
+    <Sidebar className="border-r border-primary/20 bg-background/30 backdrop-blur-xl">
       <SidebarHeader>
         <Link href="/" className="flex items-center gap-2 p-2">
           <Clapperboard className="w-8 h-8 text-primary drop-shadow-[0_0_8px_hsl(var(--primary))]" />
