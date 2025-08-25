@@ -27,14 +27,18 @@ export function Header() {
       <div className="md:hidden">
         <SidebarTrigger />
       </div>
-      <form onSubmit={handleSearch} className="relative flex-1">
+      <form onSubmit={handleSearch} className="relative flex-1 flex items-center">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input 
           placeholder="Search videos..." 
-          className="w-full rounded-full pl-10 bg-transparent"
+          className="w-full rounded-full pl-10 pr-12 bg-transparent"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        <Button type="submit" size="icon" variant="ghost" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full">
+            <Search className="h-4 w-4" />
+            <span className="sr-only">Search</span>
+        </Button>
       </form>
       {user ? (
         <DropdownMenu>
