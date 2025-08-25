@@ -10,9 +10,14 @@ interface VideoCardProps {
 }
 
 export function VideoCard({ video, onSelectVideo }: VideoCardProps) {
+  const handleSelect = () => {
+    localStorage.setItem('lastWatchedVideoId', video.id);
+    onSelectVideo(video);
+  }
+
   return (
     <button
-      onClick={() => onSelectVideo(video)}
+      onClick={handleSelect}
       className="group w-full text-left"
     >
       <div className="aspect-video w-full overflow-hidden rounded-lg bg-card transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/30">

@@ -9,15 +9,17 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { Clapperboard, Home, Flame, History, Library, User } from "lucide-react";
+import { Clapperboard, Home, Flame, History, Library, User, Heart } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const GlowingIcon = ({ icon: Icon, ...props }: { icon: React.ElementType, [key: string]: any }) => (
     <Icon className="transition-all group-hover:text-accent group-hover:drop-shadow-[0_0_5px_hsl(var(--accent))]" {...props} />
 )
 
 export function AppSidebar() {
+  const pathname = usePathname();
   return (
     <Sidebar className="border-r border-primary/10 bg-background/50 backdrop-blur-xl">
       <SidebarHeader>
@@ -31,10 +33,18 @@ export function AppSidebar() {
       <SidebarContent className="p-2">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Home" isActive>
+            <SidebarMenuButton asChild tooltip="Home" isActive={pathname === '/'}>
               <Link href="/">
                 <GlowingIcon icon={Home} />
                 <span>Home</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+           <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="For You" isActive={pathname === '/for-you'}>
+              <Link href="/for-you">
+                <GlowingIcon icon={Heart} />
+                <span>For You</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
