@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import type { Video } from '@/lib/types';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { useEffect, useRef } from 'react';
 
 interface VideoCardProps {
   video: Video;
@@ -11,19 +12,46 @@ interface VideoCardProps {
 }
 
 export function VideoCard({ video, onSelectVideo }: VideoCardProps) {
+  const cardRef = useRef<HTMLButtonElement>(null);
+  
   const handleSelect = () => {
-    localStorage.setItem('lastWatchedVideoId', video.id);
     if (onSelectVideo) {
       onSelectVideo(video);
     }
   }
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('video-card-enter-active');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      cardRef.current.classList.add('video-card-enter');
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
+
   return (
     <button
+      ref={cardRef}
       onClick={handleSelect}
-      className="group w-full text-left"
+      className="group w-full text-left transition-transform duration-300 ease-in-out hover:!opacity-100 hover:scale-105"
     >
-      <div className="aspect-video w-full overflow-hidden rounded-lg bg-card/50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/30 ring-1 ring-inset ring-transparent group-hover:ring-primary/50">
+      <div className="aspect-video w-full overflow-hidden rounded-xl bg-card/50 transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-primary/30 ring-1 ring-inset ring-transparent group-hover:ring-primary/50">
         <Image
           src={video.thumbnailUrl}
           alt={video.title}
