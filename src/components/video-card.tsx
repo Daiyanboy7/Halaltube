@@ -7,13 +7,15 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 interface VideoCardProps {
   video: Video;
-  onSelectVideo: (video: Video) => void;
+  onSelectVideo?: (video: Video) => void;
 }
 
 export function VideoCard({ video, onSelectVideo }: VideoCardProps) {
   const handleSelect = () => {
     localStorage.setItem('lastWatchedVideoId', video.id);
-    onSelectVideo(video);
+    if (onSelectVideo) {
+      onSelectVideo(video);
+    }
   }
 
   return (

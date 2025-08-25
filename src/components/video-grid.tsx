@@ -3,7 +3,7 @@
 import type { Video } from '@/lib/types';
 import { VideoCard } from './video-card';
 
-export function VideoGrid({ videos, onSelectVideo }: { videos: Video[], onSelectVideo: (video: Video) => void }) {
+export function VideoGrid({ videos, onSelectVideo }: { videos: Video[], onSelectVideo?: (video: Video) => void }) {
 
   if (videos.length === 0) {
     return <p className="text-muted-foreground">No videos found.</p>;
