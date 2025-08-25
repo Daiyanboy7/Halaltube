@@ -3,38 +3,27 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { Header } from "@/components/header";
 import { VideoGrid } from "@/components/video-grid";
-import { searchVideos, getPopularVideos } from "@/lib/youtube";
+import { getPopularVideos } from "@/lib/youtube";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { SidebarInset } from "@/components/ui/sidebar";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import type { Video } from "@/lib/types";
 import { VideoPlayerModal } from "@/components/video-player-modal";
 
 export default function ForYouPage() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isPopular, setIsPopular] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
-  const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    const lastWatchedVideoId = localStorage.getItem('lastWatchedVideoId');
-
-    if (lastWatchedVideoId) {
-      const relatedVideos = await searchVideos("", lastWatchedVideoId);
-      setVideos(relatedVideos);
-      setIsPopular(false);
-    } else {
+  useEffect(() => {
+    const fetchVideos = async () => {
+      setIsLoading(true);
       const popularVideos = await getPopularVideos();
       setVideos(popularVideos);
-      setIsPopular(true);
-    }
-    setIsLoading(false);
+      setIsLoading(false);
+    };
+    fetchVideos();
   }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
   
   const handleSelectVideo = (video: Video) => {
     localStorage.setItem('lastWatchedVideoId', video.id);
@@ -43,7 +32,6 @@ export default function ForYouPage() {
 
   const handleCloseModal = () => {
     setSelectedVideo(null);
-    fetchData(); // Refetch data when modal is closed
   }
 
   return (
@@ -54,14 +42,14 @@ export default function ForYouPage() {
             <Header />
             <main className="flex-1 p-4 md:p-6 lg:p-8">
               <h1 className="text-2xl md:text-3xl font-bold mb-6 font-headline tracking-wider text-primary-foreground">
-                {isPopular ? "Trending Videos" : "For You"}
+                Popular Videos
               </h1>
               {isLoading ? (
-                <p className="text-muted-foreground">Loading your personalized suggestions...</p>
+                <p className="text-muted-foreground">Loading videos...</p>
               ) : videos.length > 0 ? (
                 <VideoGrid videos={videos} onSelectVideo={handleSelectVideo} />
               ) : (
-                <p className="text-muted-foreground">Watch a video to get personalized suggestions here!</p>
+                <p className="text-muted-foreground">No videos found.</p>
               )}
             </main>
         </SidebarInset>

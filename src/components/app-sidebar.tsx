@@ -42,14 +42,6 @@ export function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-             <SidebarMenuButton asChild tooltip="Trending" isActive={pathname === '/trending'}>
-              <Link href="/trending">
-                <GlowingIcon icon={Flame} />
-                <span>Trending</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="History">
               <Link href="#">
                 <GlowingIcon icon={History} />
