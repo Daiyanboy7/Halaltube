@@ -28,8 +28,10 @@ export function SmartScrubbing({ videoDataUri }: SmartScrubbingProps) {
         setIsLoading(true);
         setError(null);
         try {
-            const result = await smartVideoScrubbing({ videoDataUri, numberOfThumbnails: 5 });
-            setThumbnails(result.thumbnailDataUris);
+            // This feature is temporarily disabled as it requires a real video file,
+            // which is not available in the current implementation.
+            // const result = await smartVideoScrubbing({ videoDataUri, numberOfThumbnails: 5 });
+            // setThumbnails(result.thumbnailDataUris);
         } catch (e: any) {
             setError(e.message || "Failed to generate thumbnails.");
         } finally {
@@ -39,12 +41,12 @@ export function SmartScrubbing({ videoDataUri }: SmartScrubbingProps) {
     // Note: This is a placeholder for a real video data URI.
     // In a real app, you would get this from a video processing service.
     // For now, we'll use a placeholder to demonstrate the AI flow.
-    generateThumbnails();
+    // generateThumbnails();
   }, [videoDataUri]);
 
 
   const placeholderThumbnails = Array.from({ length: 5 }).map(
-    (_, i) => `https://placehold.co/160x90.png?text=Frame+${i + 1}`
+    (_, i) => `https://placehold.co/160x90.png`
   );
 
   const displayThumbnails = thumbnails.length > 0 ? thumbnails : placeholderThumbnails;
