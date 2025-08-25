@@ -1,12 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import type { Video } from '@/lib/types';
 import { VideoCard } from './video-card';
-import { VideoPlayerModal } from './video-player-modal';
 
-export function VideoGrid({ videos }: { videos: Video[] }) {
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+export function VideoGrid({ videos, onSelectVideo }: { videos: Video[], onSelectVideo: (video: Video) => void }) {
 
   if (videos.length === 0) {
     return <p className="text-muted-foreground">No videos found.</p>;
@@ -19,17 +16,10 @@ export function VideoGrid({ videos }: { videos: Video[] }) {
           <VideoCard
             key={video.id}
             video={video}
-            onSelectVideo={() => setSelectedVideo(video)}
+            onSelectVideo={onSelectVideo}
           />
         ))}
       </div>
-      {selectedVideo && (
-        <VideoPlayerModal
-          video={selectedVideo}
-          isOpen={!!selectedVideo}
-          onClose={() => setSelectedVideo(null)}
-        />
-      )}
     </>
   );
 }

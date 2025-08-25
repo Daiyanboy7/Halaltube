@@ -6,33 +6,45 @@ import { VideoGrid } from "@/components/video-grid";
 import { searchVideos, getPopularVideos } from "@/lib/youtube";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { SidebarInset } from "@/components/ui/sidebar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import type { Video } from "@/lib/types";
+import { VideoPlayerModal } from "@/components/video-player-modal";
 
 export default function ForYouPage() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isPopular, setIsPopular] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
-  useEffect(() => {
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
     const lastWatchedVideoId = localStorage.getItem('lastWatchedVideoId');
 
-    async function fetchData() {
-      setIsLoading(true);
-      if (lastWatchedVideoId) {
-        const relatedVideos = await searchVideos("", lastWatchedVideoId);
-        setVideos(relatedVideos);
-        setIsPopular(false);
-      } else {
-        const popularVideos = await getPopularVideos();
-        setVideos(popularVideos);
-        setIsPopular(true);
-      }
-      setIsLoading(false);
+    if (lastWatchedVideoId) {
+      const relatedVideos = await searchVideos("", lastWatchedVideoId);
+      setVideos(relatedVideos);
+      setIsPopular(false);
+    } else {
+      const popularVideos = await getPopularVideos();
+      setVideos(popularVideos);
+      setIsPopular(true);
     }
-
-    fetchData();
+    setIsLoading(false);
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+  
+  const handleSelectVideo = (video: Video) => {
+    localStorage.setItem('lastWatchedVideoId', video.id);
+    setSelectedVideo(video);
+  }
+
+  const handleCloseModal = () => {
+    setSelectedVideo(null);
+    fetchData(); // Refetch data when modal is closed
+  }
 
   return (
     <SidebarProvider>
@@ -47,13 +59,20 @@ export default function ForYouPage() {
               {isLoading ? (
                 <p className="text-muted-foreground">Loading your personalized suggestions...</p>
               ) : videos.length > 0 ? (
-                <VideoGrid videos={videos} />
+                <VideoGrid videos={videos} onSelectVideo={handleSelectVideo} />
               ) : (
                 <p className="text-muted-foreground">Watch a video to get personalized suggestions here!</p>
               )}
             </main>
         </SidebarInset>
       </div>
+      {selectedVideo && (
+        <VideoPlayerModal
+          video={selectedVideo}
+          isOpen={!!selectedVideo}
+          onClose={handleCloseModal}
+        />
+      )}
     </SidebarProvider>
   );
 }
