@@ -21,6 +21,11 @@ interface VideoPlayerModalProps {
 export function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalProps) {
   const [isLiked, setIsLiked] = useState(false);
 
+  // This is a placeholder for the video data URI that would be passed to the SmartScrubbing component.
+  // In a real-world application, you would need a mechanism to fetch or generate
+  // this data URI when the video is selected.
+  const sampleVideoDataUri = "data:video/mp4;base64,AAAA...THIS_IS_A_PLACEHOLDER...AAAA";
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl w-full p-0 border-primary/20 bg-background/80 backdrop-blur-2xl !rounded-xl">
@@ -49,7 +54,7 @@ export function VideoPlayerModal({ video, isOpen, onClose }: VideoPlayerModalPro
               </div>
             </div>
             <Separator className="my-6 bg-primary/20" />
-            <SmartScrubbing />
+            <SmartScrubbing videoDataUri={sampleVideoDataUri} />
           </div>
           <div className="md:col-span-3 lg:col-span-1 p-4 bg-black/20 lg:rounded-r-xl overflow-y-auto max-h-[90vh]">
             <div className="flex flex-col gap-6">
