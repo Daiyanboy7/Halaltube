@@ -21,8 +21,8 @@ const mapYouTubeItemToVideo = (item: any): Video => {
     channel: item.snippet.channelTitle,
     thumbnailUrl: thumbnail,
     channelImageUrl: 'https://placehold.co/40x40.png', 
-    views: item.statistics?.viewCount ? `${Math.round(parseInt(item.statistics.viewCount) / 1000000)}M` : 'N/A',
-    uploadedAt: new Date(item.snippet.publishedAt).toLocaleDateString(),
+    views: item.statistics?.viewCount ? `${Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(parseInt(item.statistics.viewCount))}` : 'N/A',
+    uploadedAt: new Date(item.snippet.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric'}),
   };
 };
 
@@ -30,32 +30,48 @@ async function enrichVideosWithChannelImages(videos: Video[], videoItems: any[])
     const channelIds = [...new Set(videoItems.map(item => item.snippet.channelId).filter(Boolean) as string[])];
     
     if (channelIds.length > 0) {
-      const channelResponse = await youtube.channels.list({
-        part: ['snippet'],
-        id: channelIds,
-      });
+      try {
+        const channelResponse = await youtube.channels.list({
+          part: ['snippet'],
+          id: channelIds,
+        });
 
-      const channelImages = new Map<string, string>();
-      channelResponse.data.items?.forEach(channel => {
-        channelImages.set(channel.id!, channel.snippet?.thumbnails?.default?.url || 'https://placehold.co/40x40.png');
-      });
+        const channelImages = new Map<string, string>();
+        channelResponse.data.items?.forEach(channel => {
+          channelImages.set(channel.id!, channel.snippet?.thumbnails?.default?.url || 'https://placehold.co/40x40.png');
+        });
 
-      videos.forEach((video, index) => {
-        const channelId = videoItems[index].snippet.channelId;
-        if(channelId && channelImages.has(channelId)) {
-          video.channelImageUrl = channelImages.get(channelId)!;
-        }
-      });
+        videos.forEach((video, index) => {
+          const channelId = videoItems[index].snippet.channelId;
+          if(channelId && channelImages.has(channelId)) {
+            video.channelImageUrl = channelImages.get(channelId)!;
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching channel images:', error);
+        // It's okay to fail here, we'll just use placeholder images.
+      }
     }
     return videos;
 }
 
 export async function getPopularVideos(): Promise<Video[]> {
   try {
+    const videoIds = [
+      "GERcgJaIPWQ",
+      "0WY9T_rBVKU",
+      "gZbK9S59pnI",
+      "DnMu5LWAQT0",
+      "cakwkkyzuco",
+      "AnMbvhqtF8E",
+      "CMPD6Ac1zH8",
+      "McHQFTv-cWY",
+      "S1YxRzVGyOg"
+    ];
+
     const response = await youtube.videos.list({
       part: ['snippet', 'contentDetails', 'statistics'],
-      chart: 'mostPopular',
-      regionCode: 'US',
+      id: videoIds,
       maxResults: 20,
     });
 
