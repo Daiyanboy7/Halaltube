@@ -4,6 +4,12 @@
 import {google} from 'googleapis';
 import type {Video} from '@/lib/types';
 
+// This check ensures that the app fails loudly during startup if the API key is missing.
+// This is better than failing silently and showing no videos.
+if (!process.env.GOOGLE_API_KEY) {
+  throw new Error('FATAL ERROR: GOOGLE_API_KEY is not defined in the environment. The application cannot start.');
+}
+
 const youtube = google.youtube({
   version: 'v3',
   auth: process.env.GOOGLE_API_KEY,
@@ -110,8 +116,59 @@ export async function getPopularVideos(): Promise<Video[]> {
       "tguOPxQLpCs",
       "ZUVTNTgf2lE",
       "DkBZ-GUgxco",
-      "TYoUS5gm1m8"
-    ];
+      "TYoUS5gm1m8",
+      "Gb9HhW9pwzs",
+      "xlstDO3e01s",
+      "mX0OFm-PJSQ",
+      "mcFkxppp9-M",
+      "feazb2-i85A",
+      "orbtHaLrjNA",
+      "ZufFbnEVqj0",
+      "3-dbT98Qxd4",
+      "QqlSY1dePxA",
+      "ozKHwPw-zIQ",
+      "xCRxjxkLIns",
+      "fsZXkQ5LuRg",
+      "P25dNu3IFno",
+      "Nnd641CP1k8",
+      "wWPEGb3l8J0",
+      "nOQ3QBSCXzY",
+      "3UNtcs2plCo",
+      "i7bd08DQZVo",
+      "0yFAMrfDXLA",
+      "EUHNTgaTemg",
+      "mDmQ2c1sRG8",
+      "LXpcPW1JZrU",
+      "Q2Ywk-9ymoY",
+      "WzGtM5wxKag",
+      "DbUT5w4kl04",
+      "1sV3E76FDbs",
+      "nRIYU3B0lJY",
+      "Ts3XwE_7QO0",
+      "vluzIUHUSno",
+      "ap6ciW2Hd6M",
+      "H4N5eFbLl9A",
+      "JShgCxireUM",
+      "Oy2gzl9fmpQ",
+      "s_yK-Abdrok",
+      "dOvIUXKJsmI",
+      "suFI9vC7HB4",
+      "R-8PnJTL-7c",
+      "uUDVc_Gcglc",
+      "lz0_fMjqo3s",
+      "ME-qirRC1Sw",
+      "HEz4yfTyj28",
+      "-FxEYa8joK8",
+      "WsKEsSA2mEk",
+      "2Ks77eHfLcQ",
+      "HVJGNeWPJrY",
+      "haplQJ0hTME",
+      "3CkbfHSuQPI",
+      "gPLi6oxj63A",
+      "-C2GDV6e2tM",
+      "USbyazRqudg",
+      "AOhTTCF_rCc"
+    ].filter((v, i, a) => a.indexOf(v) === i); // Remove duplicates
 
     const response = await youtube.videos.list({
       part: ['snippet', 'contentDetails', 'statistics'],
@@ -178,3 +235,5 @@ export async function searchVideos(query: string, relatedToVideoId?: string): Pr
     return [];
   }
 }
+
+    
