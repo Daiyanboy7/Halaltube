@@ -48,7 +48,7 @@ export function VideoCard({ video, onSelectVideo }: VideoCardProps) {
   return (
     <button
       ref={cardRef}
-      onClick={handleSelect}
+      onClick={handleSelect} // Added the 'floating-animation' class
       className="group w-full text-left transition-transform duration-300 ease-in-out hover:!opacity-100 hover:scale-105"
     >
       <div className="aspect-video w-full overflow-hidden rounded-xl bg-card/50 backdrop-blur-xl transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-primary/30 ring-2 ring-inset ring-transparent group-hover:ring-primary/70">

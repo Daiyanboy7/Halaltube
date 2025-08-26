@@ -21,7 +21,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const GlowingIcon = ({ icon: Icon, ...props }: { icon: React.ElementType, [key: string]: any }) => (
-    <Icon className="transition-all text-foreground/80 group-hover:text-accent group-hover:drop-shadow-[0_0_5px_hsl(var(--accent))]" {...props} />
+    <Icon className="transition-all text-foreground/80 group-hover:text-accent group-hover:drop-shadow-[0_0_5px_hsl(var(--accent))] floating-icon" {...props} />
 )
 
 const studyQuotes = [
